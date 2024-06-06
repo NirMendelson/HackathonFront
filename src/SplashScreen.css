@@ -1,0 +1,9 @@
+/* SplashScreen.css */
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+
+.playpen-sans-unique {
+  font-family: "Playpen Sans", cursive;
+  font-weight: 200; /* Adjust the weight as needed, between 100 and 800 */
+  font-style: normal;
+  font-size: 35px;
+}
