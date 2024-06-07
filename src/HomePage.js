@@ -69,7 +69,7 @@ function HomePage() {
                 <IconButton onClick={toggleSessions} sx={{ color: 'white', mt: -2.0 }}>
                     {showSessions ? <ArrowDropDownIcon fontSize="large" /> : <ArrowDropUpIcon fontSize="large" />}
                 </IconButton>
-                <Typography variant="h6" sx={{ color: 'white', fontWeight: 300, mt: -2 }}>
+                <Typography variant="h6" sx={{ color: 'white', fontWeight: 300, mt: -2.5 }}>
                     Previous Sessions
                 </Typography>
                 {sessionDates.map((date, index) => (
