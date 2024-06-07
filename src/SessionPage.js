@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Typography, Container, IconButton, Box } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import './SessionPage.css'; // Ensure to import the CSS file containing the ripple animation
 
 function SessionPage() {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ function SessionPage() {
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
     
     const messages = [
-        { text: "Monitoring your brain activity", duration: 5000 },
+        { text: "Monitoring your brain activity", duration: 105000 },
         { text: "Calm detected, playing soothing music", duration: 5000, playMusic: true },
         { text: "Relax and enjoy the melody", duration: 7000 },
         { text: "Music paused, assessing your relaxation", duration: 7000, pauseMusic: true },
@@ -65,6 +66,7 @@ function SessionPage() {
             backgroundColor: '#e7f3f6',
             border: '3px solid #000000',
             borderRadius: '10px',
+            overflow: 'hidden'  // Ensure the container clips the overflowing elements
         }}>
             <IconButton
                 sx={{
@@ -73,6 +75,7 @@ function SessionPage() {
                     left: 10,
                     color: 'black',
                     backgroundColor: 'transparent',
+                    zIndex: 10,  // Ensure the CloseIcon button is on top
                     ":hover": {
                         backgroundColor: 'transparent',
                     }
@@ -88,6 +91,7 @@ function SessionPage() {
                     },
                     width: 250,
                     height: 250,
+                    position: 'relative',
                     animation: shouldAnimate ? 'sessionPagePulse 2s infinite' : 'none',
                     '@keyframes sessionPagePulse': {
                         '0%, 100%': {
@@ -99,9 +103,18 @@ function SessionPage() {
                     }
                 }}
             >
-                <img src="MainButton2.png" alt="Session Icon" style={{ width: '400%', height: '100%' }} />
+                <img src="MainButton2.png" alt="Session Icon" style={{ width: '100%', height: '100%' }} />
+                {shouldAnimate && (
+                    <>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                    </>
+                )}
             </IconButton>
-            <Typography variant="h6" sx={{ fontWeight: 400, fontSize: 24}}>
+            <Typography variant="h6" sx={{ fontWeight: 400, fontSize: 24 }}>
                 Session in progress
             </Typography>
             <Box sx={{ width: '100%', mt: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

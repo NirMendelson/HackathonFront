@@ -1,0 +1,58 @@
+@keyframes ripple {
+    0% {
+      transform: scale(0.2);
+      opacity: 0.5; /* Initial opacity for the animation */
+    }
+    70% {
+      transform: scale(5);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(5);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes sessionPagePulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.15);
+    }
+  }
+  
+  .ripple-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 5px solid rgba(0, 0, 0, 0.4); /* Reduce border opacity */
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0; /* Initially hide the ripples */
+    animation: ripple 8s infinite;
+    animation-fill-mode: forwards; /* Ensures the animation retains its final state */
+  }
+  
+  .ripple-overlay:nth-child(1) {
+    animation-delay: 0.5s;
+  }
+  
+  .ripple-overlay:nth-child(2) {
+    animation-delay: 2s;
+  }
+  
+  .ripple-overlay:nth-child(3) {
+    animation-delay: 3.5s;
+  }
+  
+  .ripple-overlay:nth-child(4) {
+    animation-delay: 5s;
+  }
+  
+  .ripple-overlay:nth-child(5) {
+    animation-delay: 6.5s;
+  }
+  
