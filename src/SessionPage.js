@@ -101,8 +101,8 @@ function SessionPage() {
             >
                 <img src="MainButton2.png" alt="Session Icon" style={{ width: '400%', height: '100%' }} />
             </IconButton>
-            <Typography variant="h6">
-                Session in progress...
+            <Typography variant="h6" sx={{ fontWeight: 400, fontSize: 24}}>
+                Session in progress
             </Typography>
             <Box sx={{ width: '100%', mt: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <img src={imageSrc} alt="Sound Animation" style={{ width: 50, height: 50 }} />

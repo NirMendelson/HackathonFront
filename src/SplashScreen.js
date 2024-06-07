@@ -27,7 +27,11 @@ function SplashScreen() {
       border: '3px solid #000000', // Adds a black border, 3px thick
       borderRadius: '10px', // Optional: Adds rounded corners
     }}>
-      <h1 className="playpen-sans-unique" style={{ marginBottom: '-10px' }}>BrainBeat</h1>
+      <h1 style={{
+        fontFamily: 'Poppins, sans-serif',
+        fontWeight: '300', // 600 is semi-bold
+        marginBottom: '-10px'
+      }}>BrainBeat</h1>
       <img src="MainButton2.png" alt="Brain Icon" style={{ width: '50%' }} />
     </div>
   );
