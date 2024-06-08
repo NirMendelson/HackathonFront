@@ -10,18 +10,17 @@ function SessionPage() {
     const audioRef = useRef(null);
     const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
 
-    const finalMessage = "You are now calm and the session is complete.";
-    const pausedMessage = "Music paused, assessing your relaxation";
     const messages = [
         { text: "Monitoring your brain activity", duration: 5000 },
         { text: "Calm detected, playing soothing music", duration: 5000, playMusic: true },
         { text: "Relax and enjoy the melody", duration: 7000 },
-        { text: pausedMessage, duration: 7000, pauseMusic: true },
+        { text: "Music paused, assessing your relaxation", duration: 7000, pauseMusic: true },
         { text: "Melody resuming, keep relaxing", duration: 7000, resumeMusic: true },
-        { text: finalMessage, duration: 9999999, resumeMusic: true }
+        { text: "You are now calm and the session is complete.", duration: 9999999, resumeMusic: true }
     ];
 
-    const shouldAnimate = currentMessageIndex !== messages.length - 1 && messages[currentMessageIndex].text !== pausedMessage;
+    // Check if the current message should animate
+    const shouldAnimate = !["Music paused, assessing your relaxation", "You are now calm and the session is complete."].includes(messages[currentMessageIndex].text);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -43,12 +42,16 @@ function SessionPage() {
 
     useEffect(() => {
         if (location.state?.startSession && audioRef.current) {
-            audioRef.current.play().catch(err => console.error("Error playing audio:", err));
+            try {
+                audioRef.current.play();
+            } catch (err) {
+                console.error("Error playing audio:", err);
+            }
         }
     }, [location.state]);
 
     const currentMessage = messages[currentMessageIndex].text;
-    const imageSrc = [pausedMessage, finalMessage].includes(currentMessage) ? "sound-frame.gif" : "sound.gif";
+    const imageSrc = ["Music paused, assessing your relaxation", "You are now calm and the session is complete."].includes(currentMessage) ? "sound-frame.gif" : "sound.gif";
 
     return (
         <Container sx={{
@@ -63,7 +66,7 @@ function SessionPage() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            backgroundColor: currentMessage === finalMessage ? '#5ff767' : '#e7f3f6',
+            backgroundColor: currentMessage === "You are now calm and the session is complete." ? '#5ff767' : '#e7f3f6',
             border: '3px solid #000000',
             borderRadius: '10px',
             overflow: 'hidden',
@@ -97,13 +100,22 @@ function SessionPage() {
                 }}
             >
                 <img src="MainButton2.png" alt="Session Icon" style={{ width: '100%', height: '100%' }} />
+                {shouldAnimate && (
+                    <>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                        <div className="ripple-overlay"></div>
+                    </>
+                )}
             </IconButton>
-            <Typography variant="h6" sx={{ fontWeight: 400, fontSize: 24 }}>
-                {currentMessage === finalMessage ? "Session Complete" : "Session in Progress"}
+            <Typography variant="h6" sx={{ fontWeight: 400, fontSize: 24, textAlign: 'center' }}>
+                {currentMessage === "You are now calm and the session is complete." ? "Session Complete" : "Session in Progress"}
             </Typography>
             <Box sx={{ width: '100%', mt: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <img src={imageSrc} alt="Sound Animation" style={{ width: 50, height: 50 }} />
-                <Typography variant="subtitle1">
+                <img src={imageSrc} alt="Sound Animation" style={{ width: 50, height: 50, textAlign: 'center' }} />
+                <Typography variant="subtitle1" sx={{ textAlign: 'center' }}>
                     {currentMessage}
                 </Typography>
             </Box>
